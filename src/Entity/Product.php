@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+=======
+>>>>>>> 6bc04780b85657709da3016d376f7ffef9ce065b
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +48,7 @@ class Product
      */
     private $discount;
 
+<<<<<<< HEAD
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product")
      */
@@ -55,6 +59,8 @@ class Product
         $this->images = new ArrayCollection();
     }
 
+=======
+>>>>>>> 6bc04780b85657709da3016d376f7ffef9ce065b
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +125,7 @@ class Product
 
         return $this;
     }
+<<<<<<< HEAD
 
     /**
      * @return Collection|Image[]
@@ -149,4 +156,6 @@ class Product
 
         return $this;
     }
+=======
+>>>>>>> 6bc04780b85657709da3016d376f7ffef9ce065b
 }
