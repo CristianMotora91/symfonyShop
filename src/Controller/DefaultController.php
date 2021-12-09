@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use PharIo\Manifest\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +27,7 @@ class DefaultController extends AbstractController
 
     public function category(Category $category, CategoryRepository $categoryRepository) : Response
     {
-        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
+        $products = $category->getProducts();
+        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll() ]);
     }
 }

@@ -2,6 +2,12 @@
     <div class="col-3 mt-3 px-3 pt-3">
         <div class="card align-middle w-100">
             <a href="{{ url('product',{'product':product.id}) }}"><img class="card-img-top" src="{{ asset('images/ ~ product.images.first') }}" alt="{{ product.name }}" style="width: 200px; height: 180px;"></a>
+            <div class="card-body text-center">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <h5>{{ product.price }}<span>Lei</span></h5>
+                <p>({{ product.discount }}%)</p>
+                <a href="#" class="btn btn-primary w-100 mt-4">Adauga in cos</a>
+            </div>
         </div>
     </div>
 {% endblock %}
