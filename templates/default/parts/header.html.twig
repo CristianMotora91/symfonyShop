@@ -5,18 +5,36 @@
             <div class="col-12">
                 <div class="container">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-2">
                             <a class="navbar-brand" href="{{ url('homepage') }}">
-                                <img width="400px" src="{{ asset('images/logoShop.png') }}" alt="logoShop.png">
+                                <img width="200px" src="{{ asset('images/logoShop.png') }}" alt="logoShop.png">
                             </a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <nav class="navbar navbar-light bg-light">
                                 <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Colectioneaza tot ce vrei" aria-label="Search">
+                                    <input width="150px" class="form-control mr-sm-2" type="search" placeholder="Colectioneaza tot ce vrei" aria-label="Search">
                                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Cauta</button>
                                 </form>
                             </nav>
+                        </div>
+                        <div class="col-3">
+                            <a class="nav-link dropdown-toggle fa fa-user-o" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ app.user }}
+                                <a href="{{ path('app_logout') }}">Logout</a>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
+                                <a class="dropdown-item" href="#">Cont nou</a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <a class="nav-link dropdown-toggle fa fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cosul meu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Cosul este gol</a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -29,8 +47,10 @@
                                                 Categorii
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                {% for category in categories %}
-                                                <a class="dropdown-item" href="{{ url('category',{'category':category.id}) }}">{{ category.name }}</a>
+                                                {% for category in twigGlobalsService.getMenuCategories() %}
+                                                <a class="dropdown-item" href="{{ url('category',{'category':category.id}) }}">{{ category.name }}
+                                                    <span class="badge badge-primary">{{ category.getProducts()|length }}</span>
+                                                </a>
                                                 {% endfor %}
                                             </div>
                                         </li>
@@ -39,13 +59,14 @@
                                                 Vendori
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Casa de Monede</a>
-                                                <a class="dropdown-item" href="#">Revell</a>
-                                                <a class="dropdown-item" href="#">Marvel</a>
+                                                {% for vendor in twigGlobalsService.getMenuVendors %}
+                                                <a class="dropdown-item" href="{{ url('vendor',{'vendor':vendor.id}) }}">{{ vendor.name }}
+                                                </a>
+                                                {% endfor %}
                                             </div>
                                         </li>
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="#"><span class="fa fa-cup"></span>Blog</a>
+                                            <a class="nav-link" href="#">Blog</a>
                                         </li>
                                     </ul>
                                 </div>

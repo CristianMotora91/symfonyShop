@@ -28,6 +28,6 @@ class DefaultController extends AbstractController
     public function category(Category $category, CategoryRepository $categoryRepository) : Response
     {
         $products = $category->getProducts();
-        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll() ]);
+        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
     }
 }

@@ -46,6 +46,11 @@ class Product
      */
     private $discount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Vendor::class, inversedBy="product")
+     */
+    private $vendor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,18 @@ class Product
     public function setDiscount(?int $discount): self
     {
         $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getVendor(): ?Vendor
+    {
+        return $this->vendor;
+    }
+
+    public function setVendor(?Vendor $vendor): self
+    {
+        $this->vendor = $vendor;
 
         return $this;
     }
