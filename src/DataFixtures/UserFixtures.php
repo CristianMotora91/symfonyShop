@@ -19,9 +19,18 @@ class UserFixtures extends Fixture
         $user = new User();
 
         $user->setEmail('admin@admin.ro')
-            ->setPassword($this->passwordEncoder->encodePassword($user,'cristian'));
+            ->setPassword($this->passwordEncoder->encodePassword($user,'cristian'))
+            ->setRoles(['ADMIN']);
 
         $manager->persist($user);
+
+        $user1 = new User();
+
+        $user1->setEmail('user@user.ro')
+            ->setPassword($this->passwordEncoder->encodePassword($user,'user'))
+            ->setRoles(['USER']);
+
+        $manager->persist($user1);
 
         $manager->flush();
     }

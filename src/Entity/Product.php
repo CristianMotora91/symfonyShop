@@ -6,8 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ImageRepository;
-use App\Entity\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
@@ -47,9 +46,11 @@ class Product
     private $discount;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Vendor::class, inversedBy="product")
+     * @ORM\ManyToOne(targetEntity=Vendor::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $vendor;
+
 
     public function getId(): ?int
     {
@@ -116,15 +117,21 @@ class Product
         return $this;
     }
 
-    public function getVendor(): ?Vendor
+    /**
+     * @return mixed
+     */
+    public function getVendor()
     {
         return $this->vendor;
     }
 
-    public function setVendor(?Vendor $vendor): self
+    /**
+     * @param mixed $vendor
+     */
+    public function setVendor($vendor)
     {
         $this->vendor = $vendor;
-
-        return $this;
     }
+
+
 }

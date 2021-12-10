@@ -20,12 +20,15 @@
                         </div>
                         <div class="col-3">
                             <a class="nav-link dropdown-toggle fa fa-user-o" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ app.user }}
-                                <a href="{{ path('app_logout') }}">Logout</a>
+                                {% if app.user %}
+                                    <a href="{{ path('app_logout') }}"><p>{{ app.user }}</p>Logout</a>
+                                {% else %}
+                                Contul meu
+                                {% endif %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
-                                <a class="dropdown-item" href="#">Cont nou</a>
+                                <a class="dropdown-item" href="{{ url('app_register') }}">Creare cont</a>
                             </div>
                         </div>
                         <div class="col-3">
@@ -67,6 +70,14 @@
                                         </li>
                                         <li class="nav-item active">
                                             <a class="nav-link" href="#">Blog</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{ url('contact') }}">Contact</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="nav-link" href="{{ url('admin') }}">Admin Page</a>
+                                            {% endif %}
                                         </li>
                                     </ul>
                                 </div>

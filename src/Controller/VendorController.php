@@ -11,12 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class VendorController extends AbstractController
 {
     /**
-     * @Route("/vendor", name="vendor")
+     * @Route("/", name="vendor_index", methods={"GET"})
      */
     public function index(): Response
     {
         return $this->render('vendor/index.html.twig', [
-            'controller_name' => 'VendorController',
+            'vendors' => $vendorRepository->findAll(),
+            'categories'=>$categoryRepository->findAll()
         ]);
     }
 

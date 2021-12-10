@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Repository\CategoryRepository;
+use App\Entity\Category;
 use App\Repository\VendorRepository;
+use App\Entity\Vendor;
 
 class TwigGlobalsService
 {
@@ -29,6 +31,12 @@ class TwigGlobalsService
     public function getMenuVendors()
     {
         return $this->vendorRepository->findAll();
+    }
+
+    public function category(Category $category, CategoryRepository $categoryRepository) : Response
+    {
+        $products = $category->getProducts();
+        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
     }
 
 }
