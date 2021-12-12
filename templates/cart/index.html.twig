@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col-12">
+        <div class="row">
+            <th>Nume produs</th>
+            <th>Pret unitar</th>
+            <th>Cantitate</th>
+            <th>Total lei</th>
+        </div>
+        {% for cartItem in cart.cartItem %}
+        <div class="row">
+            <td>{{ cartItem.product.name }}</td>
+            <td>{{ cartItem.product.price }}</td>
+            <td>{{ cartItem.product.quantity }}</td>
+            <td>{{ cartItem.product.price * cartItem.quantity }} RON</td>
+            <td><a class="btn btn-danger" href="{{ url('cart_delete',('product':cartItem.product)) }}">Delete</a></td>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

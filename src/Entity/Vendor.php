@@ -27,7 +27,7 @@ class Vendor
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="vendor")
      */
-    private $product;
+    private $products;
 
     public function __construct()
     {
@@ -80,4 +80,11 @@ class Vendor
 
         return $this;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

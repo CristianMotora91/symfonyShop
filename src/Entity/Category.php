@@ -22,12 +22,12 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category", orphanRemoval=true)
      */
-    private $products;
+    public $products;
 
     public function __construct()
     {
@@ -80,4 +80,11 @@ class Category
 
         return $this;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

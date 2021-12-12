@@ -7,22 +7,21 @@ use App\Repository\VendorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
+use App\Entity\Product;
+
+/**
+ * @Route("/vendor")
+ */
 
 class VendorController extends AbstractController
 {
     /**
-     * @Route("/", name="vendor_index", methods={"GET"})
+     * @Route("/view/{vendor}", name="vendor")
      */
-    public function index(): Response
+    public function view(Vendor $vendor, VendorRepository $vendorRepository) : Response
     {
-        return $this->render('vendor/index.html.twig', [
-            'vendors' => $vendorRepository->findAll(),
-            'categories'=>$categoryRepository->findAll()
-        ]);
-    }
-
-    public function vendor(Vendor $vendor, VendorRepository $vendorRepository) : Response
-    {
-        $products = $vendor->getProducts();
+        return $this->render('vendor\index.html.twig',['vendor'=>$vendor, 'vendors'=>$vendorRepository->findAll()]);
     }
 }

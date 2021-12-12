@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Images</th>
+                <th>Discount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.description }}</td>
+                <td>
+                    {% for image in product.productImages %}
+                        <img height="70" src="{{ asset('images/'~ image.image) }}"/>
+                    {% endfor %}
+                </td>
+                <td>{{ product.discount }}</td>
+                <td>
+                    <a href="{{ path('crud_product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('crud_product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('crud_product_new') }}">Create new</a>
+    </div>
+{% endblock %}

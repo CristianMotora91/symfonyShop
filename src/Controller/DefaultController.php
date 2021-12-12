@@ -25,15 +25,6 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig',['categories'=>$categoryRepository->findAll()]);
     }
 
-    /**
-     * @Route("/category/{category}", name="category")
-     */
-
-    public function category(Category $category, CategoryRepository $categoryRepository) : Response
-    {
-        $products = $category->getProducts();
-        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
-    }
 
     /**
      * @Route("/vendor/{vendor}", name="vendor")

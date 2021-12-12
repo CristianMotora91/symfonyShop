@@ -6,6 +6,9 @@ use App\Repository\CategoryRepository;
 use App\Entity\Category;
 use App\Repository\VendorRepository;
 use App\Entity\Vendor;
+use App\Repository\ProductRepository;
+use App\Entity\Product;
+use Symfony\Flex\Response;
 
 class TwigGlobalsService
 {
@@ -39,4 +42,9 @@ class TwigGlobalsService
         return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
     }
 
+    public function product(Product $product, ProductRepository $productRepository) : Response
+    {
+        $product = $productRepository->findAll();
+        $products = $productRepository->findAll();
+    }
 }

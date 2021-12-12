@@ -16,9 +16,9 @@
    <div class="container">
       <div class="col-12">
          <div class="row">
-            {% for product in category.getProducts() %}
-            {{ include ('default/product/productCard.html.twig') }}
-            {% endfor %}
+             {% for product in category.getProducts() %}
+                 {{ include ('default/product/productCard.html.twig') }}
+             {% endfor %}
          </div>
       </div>
    </div>
