@@ -3,23 +3,49 @@
 {% block title %}Hello CartController!{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container mt-5">
     <div class="col-12">
-        <div class="row">
-            <th>Nume produs</th>
-            <th>Pret unitar</th>
-            <th>Cantitate</th>
-            <th>Total lei</th>
-        </div>
-        {% for cartItem in cart.cartItem %}
-        <div class="row">
-            <td>{{ cartItem.product.name }}</td>
-            <td>{{ cartItem.product.price }}</td>
-            <td>{{ cartItem.product.quantity }}</td>
-            <td>{{ cartItem.product.price * cartItem.quantity }} RON</td>
-            <td><a class="btn btn-danger" href="{{ url('cart_delete',('product':cartItem.product)) }}">Delete</a></td>
-        </div>
+        <table>
+            <tr class="col-2">
+                <div><th>Nume produs</th></div>
+                <th>Pret unitar</th>
+                <th>Cantitate</th>
+                <th>Total lei</th>
+                <th></th>
+            </tr>
+        {% for cartItem in cart.cartItems %}
+            <tr>
+                <td>{{ cartItem.product.name }}</td>
+                <td>{{ cartItem.product.price }} LEI</td>
+                <td>
+                    <form action="{{ url('cart_update',{'product':cartItem.product.id}) }}" method="post">
+                        <input type="number" min="1" max="100" name="quantity" value="{{ cartItem.quantity }}">
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    {% if cartService.getPromoCartItemTotal(cartItem) != cartService.getCartItemTotal(cartItem) %}
+                        <strike>{{ cartService.getCartItemTotal(cartItem) }} LEI</strike>
+                        <hr />
+                    {% endif %}
+                    {{ cartService.getPromoCartItemTotal(cartItem) }} LEI
+                </td>
+                <td><a class="btn btn-danger" href="{{ url('cart_delete',{'product':cartItem.product.id}) }}">Delete</a></td>
+            </tr>
         {% endfor %}
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                    <strike>{{ cartService.getCartTotal() }} LEI</strike>
+                    <br />
+                    {{ cartService.getPromoCartTotal() }}
+                </th>
+                <th></th>
+            </tr>
+        </table>
+        <a class="btn btn-danger" href="{{ url('cart_empty') }}"> Sterge cos </a>
     </div>
 
 </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vendori - Magazinul colectionarului{% endblock %}
+{% block title %}{{ vendor.name }} - Magazinul colectionarului{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -14,7 +14,11 @@
     </div>
     <div class="container">
         <div class="col-12">
+            <div class="row">
+            {% for product in vendor.getProducts() %}
+                {{ include ('default/product/productCard.html.twig') }}
+            {% endfor %}
+            </div>
         </div>
-    </div>
     </div>
 {% endblock %}

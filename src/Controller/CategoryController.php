@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 
 /**
  * @Route("/category")
@@ -21,10 +23,13 @@ class CategoryController extends AbstractController
      * @Route("/view/{category}", name="category")
      */
 
-    public function view(Category $category, CategoryRepository $categoryRepository) : Response
+    public function view(ProductRepository $productRepository,Product $product, Category $category, Request $request) : Response
     {
-        $products = $category->getProducts();
-        return $this->render('default/category.html.twig',['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
+        return $this->render('default/category.html.twig',
+            [
+                'product'=>$product,
+                'category'=>$category
+            ]);
     }
 
     /**

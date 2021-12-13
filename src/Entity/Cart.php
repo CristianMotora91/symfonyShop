@@ -6,6 +6,7 @@ use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Service\CartService;
 
 /**
  * @ORM\Entity(repositoryClass=CartRepository::class)
@@ -27,7 +28,7 @@ class Cart
     /**
      * @ORM\OneToMany(targetEntity=CartItem::class, mappedBy="cart", orphanRemoval=true)
      */
-    private $cartItems;
+    public $cartItems;
 
     public function __construct()
     {

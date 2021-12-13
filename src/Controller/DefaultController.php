@@ -14,28 +14,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Config\Exception;
+use App\Service\CartService;
+use App\Entity\Cart;
 
 class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(ProductRepository $productRepository,CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService): Response
     {
-        return $this->render('default/index.html.twig',['categories'=>$categoryRepository->findAll()]);
-    }
-
-
-    /**
-     * @Route("/vendor/{vendor}", name="vendor")
-     */
-    public function vendor(Vendor $vendor, VendorRepository $vendorRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
-    {
-        return $this->render('vendor/index.html.twig',
-            [   'vendor'=>$vendor,
+        return $this->render('default/index.html.twig',
+            [
+                'categories'=>$categoryRepository->findAll(),
                 'vendors'=>$vendorRepository->findAll(),
-                'categories'=> $categoryRepository->findAll(),
-                'products'=>$productRepository->findAll()
+                'productsNewest'=>$productRepository->findBy([],['id'=>'DESC'],4),
+                'productsCoins'=>$productRepository->findBy(['category'=>10], ['id'=>'DESC'], 4),
+                'productsModels'=>$productRepository->findBy(['category'=>11], ['id'=>'DESC'], 4),
+                'productsFigures'=>$productRepository->findBy(['category'=>12], ['id'=>'DESC'], 4),
+                'cart'=>$cartService
             ]);
     }
 

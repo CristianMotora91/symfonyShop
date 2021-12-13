@@ -34,10 +34,34 @@
                             <div class="col-12">
                                 <h3>Cele mai noi produse</h3>
                             </div>
+                            {% for product in productsNewest %}
+                                {{ include ('default/product/productCard.html.twig') }}
+                            {% endfor %}
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h3>Cele mai noi monede</h3>
+                            </div>
+                            {% for product in productsCoins %}
+                                {{ include ('default/product/productCard.html.twig') }}
+                            {% endfor %}
                         </div>
-                        <div>
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <h3>Cele mai noi machete</h3>
+                                </div>
+                                {% for product in productsModels %}
+                                    {{ include ('default/product/productCard.html.twig') }}
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <h3>Cele mai noi figurine</h3>
+                                </div>
+                                {% for product in productsFigures %}
+                                    {{ include ('default/product/productCard.html.twig') }}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

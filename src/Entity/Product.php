@@ -11,6 +11,7 @@ use App\Entity\ProductImage;
 use App\Repository\ProductImageRepository;
 use App\Service\TwigGlobalsService;
 use App\Service\CartService;
+
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
@@ -78,9 +79,9 @@ class Product
      *     mimeTypesMessage = "Please upload a valid Image"
      * ),
      * @Assert\Image(
-     *     minWidth = 200,
+     *     minWidth = 100,
      *     maxWidth = 4000,
-     *     minHeight = 200,
+     *     minHeight = 100,
      *     maxHeight = 4000
      * )
      * })
@@ -179,6 +180,10 @@ class Product
         $this->vendor = $vendor;
     }
 
+    /**
+     * @return Collection|Image[]
+     */
+
     public function getImage(): ?string
     {
         return $this->image;
@@ -214,6 +219,14 @@ class Product
         return $this;
     }
 
+    public function getFinalPrice()
+    {
+        $price = $this->price - $this->price*$this->discount/100;
+
+        return $price;
+    }
+
+
     /**
      * @return Collection|CartItem[]
      */
@@ -243,6 +256,25 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProductImages()
+    {
+        return $this->productImages;
+    }
+
+    /**
+     * @param mixed $productImages
+     * @return Product
+     */
+    public function setProductImages($productImages)
+    {
+        $this->productImages = $productImages;
+        return $this;
+    }
+
 
 
 

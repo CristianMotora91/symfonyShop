@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ProductImage;
 use App\Service\CartService;
+use App\Repository\ProductImageRepository;
 
 /**
  * @Route("/product")
